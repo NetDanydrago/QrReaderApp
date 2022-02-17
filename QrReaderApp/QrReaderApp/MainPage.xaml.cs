@@ -17,14 +17,26 @@ namespace QrReaderApp
         {
             InitializeComponent();
             PickButton.Clicked += OnPickButton_Clicked;
+            TakeButton.Clicked += OnTakeButton_Clicked;
         }
 
         private async void OnPickButton_Clicked(object sender, EventArgs e)
+        {       
+            var Photo = await MediaPicker.PickPhotoAsync();
+            await ReadQr(Photo);
+        }
+
+        private async void OnTakeButton_Clicked(object sender, EventArgs e)
+        {
+            var Photo = await MediaPicker.CapturePhotoAsync();
+            await ReadQr(Photo);
+        }
+
+        private async Task ReadQr(FileResult photo)
         {
             byte[] ImageArray = default;
-            var Photo = await MediaPicker.PickPhotoAsync();
-            PhotoImage.Source = ImageSource.FromFile(Photo.FullPath);
-            var Stream = await Photo.OpenReadAsync();
+            PhotoImage.Source = ImageSource.FromFile(photo.FullPath);
+            var Stream = await photo.OpenReadAsync();
             using (MemoryStream memory = new MemoryStream())
             {
                 Stream.CopyTo(memory);
@@ -32,7 +44,6 @@ namespace QrReaderApp
             }
             var Result = DependencyService.Get<IQrReader>().GetQRValue(ImageArray);
             TextQr.Text = Result.QRText;
-
         }
     }
 }

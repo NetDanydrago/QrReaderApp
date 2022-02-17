@@ -5,6 +5,7 @@
 
     <StackLayout>
         <Button x:Name="PickButton" Text="Pick Photo"  />
+        <Button x:Name="TakeButton" Text="Take Photo"  />
         <Image x:Name="PhotoImage"  WidthRequest="200" HeightRequest="200" />
         <Label x:Name="TextQr"/>
     </StackLayout>
