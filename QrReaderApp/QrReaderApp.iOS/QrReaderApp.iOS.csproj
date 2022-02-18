@@ -130,11 +130,11 @@
       <Version>0.16.8</Version>
     </PackageReference>
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\QrReaderApp\QrReaderApp.csproj">
-      <Project>{A41F58DE-A229-4FEA-90EB-0D96CD74BE75}</Project>
+      <Project>{ad56d91b-caa9-4527-9204-d398b2ced857}</Project>
       <Name>QrReaderApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

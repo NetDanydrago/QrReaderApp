@@ -32,28 +32,28 @@ namespace QrReaderApp.Droid.Services
             {
                 try
                 {
-                    //Obtener una representacion de la imagen en bitmat a partir del arreglo de bytes.
+                    //Obtener una representación de la imagen en Bitmat a partir del arreglo de bytes.
                     BitmapFactory.Options Options = new BitmapFactory.Options();
                     Options.InSampleSize = 2;
                     Bitmap Bitmap = BitmapFactory.DecodeByteArray(image, 0, image.Length, Options);
 
-                    //obtener el rgb de la imagen en un arreglo.
+                    //Tratar la imagen para obtener el arreglo de bytes en RGB
                     byte[] RgbBytes = GetRgbBytes(Bitmap);
-                    LuminanceSource source = new RGBLuminanceSource(RgbBytes, Bitmap.Width, Bitmap.Height);
-                    BinaryBitmap ImageBitMap = new BinaryBitmap(new HybridBinarizer(source));
+                    LuminanceSource Source = new RGBLuminanceSource(RgbBytes, Bitmap.Width, Bitmap.Height);
+                    BinaryBitmap ImageBitMap = new BinaryBitmap(new HybridBinarizer(Source));
 
                     //Leer el QR de La Imagen
                     var Reader = new MultiFormatReader();
-                    IDictionary<DecodeHintType, object> hints = new Dictionary<DecodeHintType, object>();
-                    hints.Add(ZXing.DecodeHintType.PURE_BARCODE, true);
-                    hints.Add(ZXing.DecodeHintType.TRY_HARDER, true);
-                    Reader.Hints = hints;
+                    IDictionary<DecodeHintType, object> Hints = new Dictionary<DecodeHintType, object>();
+                    Hints.Add(ZXing.DecodeHintType.PURE_BARCODE, true);
+                    Hints.Add(ZXing.DecodeHintType.TRY_HARDER, true);
+                    Reader.Hints = Hints;
                     var Result = Reader.decode(ImageBitMap);
                     ResultReader = new QrReaderResult(image, Result.Text);
                 }
                 catch (Exception ex)
                 {
-                    ResultReader = new QrReaderResult(image, $"error al tratar de leer la imagen");
+                    ResultReader = new QrReaderResult(image, $"Error al tratar de leer la imagen");
                     System.Diagnostics.Debug.WriteLine(ex.Message);
                 }
 
@@ -61,7 +61,7 @@ namespace QrReaderApp.Droid.Services
             return ResultReader;
         }
 
-        public byte[] GetRgbBytes(Bitmap image)
+        private byte[] GetRgbBytes(Bitmap image)
         {
             var RgbBytes = new List<byte>();
             var Pixels = new int[image.Width * image.Height];

@@ -28,27 +28,27 @@ namespace QrReaderApp.iOS.Services
             {
                 try
                 {
-                    //Obtener una representacion de la imagen en UIImage a partir del arreglo de bytes.
+                    //Obtener una representación de la imagen en UIImage a partir del arreglo de bytes.
                     var Data = NSData.FromArray(image);
                     var UIimage = UIImage.LoadFromData(Data);
 
-                    //obtener el rgb de la imagen en un arreglo.
+                    //Tratar la imagen para obtener el arreglo de bytes en RGB
                     byte[] RgbBytes = GetRgbBytes(UIimage);
                     LuminanceSource Source = new RGBLuminanceSource(RgbBytes, (int)UIimage.Size.Width, (int)UIimage.Size.Height);
                     BinaryBitmap ImageBitMap = new BinaryBitmap(new HybridBinarizer(Source));
 
-                    //Leer el QR de La Imagen
+                    //Leer el QR de la imagen
                     var Reader = new MultiFormatReader();
-                    IDictionary<DecodeHintType, object> hints = new Dictionary<DecodeHintType, object>();
-                    hints.Add(ZXing.DecodeHintType.PURE_BARCODE, true);
-                    hints.Add(ZXing.DecodeHintType.TRY_HARDER, true);
-                    Reader.Hints = hints;
+                    IDictionary<DecodeHintType, object> Hints = new Dictionary<DecodeHintType, object>();
+                    Hints.Add(ZXing.DecodeHintType.PURE_BARCODE, true);
+                    Hints.Add(ZXing.DecodeHintType.TRY_HARDER, true);
+                    Reader.Hints = Hints;
                     var Result = Reader.decode(ImageBitMap);
                     ResultReader = new QrReaderResult(image, Result.Text);
                 }
                 catch (Exception ex)
                 {
-                    ResultReader = new QrReaderResult(image, "No se pudo leer el Qr de la imagen");
+                    ResultReader = new QrReaderResult(image, "Error al tratar de leer la imagen");
                     System.Diagnostics.Debug.WriteLine(ex.Message);
                 }
             }
@@ -56,7 +56,7 @@ namespace QrReaderApp.iOS.Services
 
         }
 
-        public static byte[] GetRgbBytes(UIImage image)
+        private byte[] GetRgbBytes(UIImage image)
         {
             var RgbBytes = new List<byte>();
 
