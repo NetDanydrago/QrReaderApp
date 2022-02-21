@@ -28,9 +28,13 @@ namespace QrReaderApp.iOS.Services
             {
                 try
                 {
+                    UIImage UIimage = default;
                     //Obtener una representación de la imagen en UIImage a partir del arreglo de bytes.
-                    var Data = NSData.FromArray(image);
-                    var UIimage = UIImage.LoadFromData(Data);
+                    using (var Data = NSData.FromArray(image))
+                    {
+                        UIimage = UIImage.LoadFromData(Data);
+                    }
+
 
                     //Tratar la imagen para obtener el arreglo de bytes en RGB
                     byte[] RgbBytes = GetRgbBytes(UIimage);
