@@ -1,4 +1,6 @@
-﻿using QrReaderApp.Interfaces;
+﻿using Plugin.Media;
+using Plugin.Media.Abstractions;
+using QrReaderApp.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,28 +24,34 @@ namespace QrReaderApp
 
         private async void OnPickButton_Clicked(object sender, EventArgs e)
         {       
-            var Photo = await MediaPicker.PickPhotoAsync();
-            await ReadQr(Photo);
+            var MediaFile = await CrossMedia.Current.PickPhotoAsync();
+            await ReadQr(MediaFile);
         }
 
         private async void OnTakeButton_Clicked(object sender, EventArgs e)
         {
-            var Photo = await MediaPicker.CapturePhotoAsync();
-            await ReadQr(Photo);
+            var MediaFile = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions()
+            {
+                PhotoSize = PhotoSize.Small,
+                Name = $"{Guid.NewGuid()}.jpg"
+            });
+            await ReadQr(MediaFile);
         }
 
-        private async Task ReadQr(FileResult photo)
+        private async Task ReadQr(MediaFile file)
         {
             byte[] ImageArray = default;
-            PhotoImage.Source = ImageSource.FromFile(photo.FullPath);
-            var Stream = await photo.OpenReadAsync();
-            using (MemoryStream memory = new MemoryStream())
+            using (Stream Stream = file.GetStream())
             {
-                Stream.CopyTo(memory);
-                ImageArray = memory.ToArray();
+                using (MemoryStream memory = new MemoryStream())
+                {
+                    Stream.CopyTo(memory);
+                    ImageArray = memory.ToArray();
+                }
             }
             var Result = DependencyService.Get<IQrReader>().GetQRValue(ImageArray);
             TextQr.Text = Result.QRText;
+            PhotoImage.Source = ImageSource.FromStream(() => new MemoryStream(ImageArray));
         }
     }
 }

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QrReaderApp.Android", "QrRe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QrReaderApp.iOS", "QrReaderApp\QrReaderApp.iOS\QrReaderApp.iOS.csproj", "{CDBA09C8-6838-43EE-8E4B-826EEDE084D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QrReaderApp", "QrReaderApp\QrReaderApp\QrReaderApp.csproj", "{AD56D91B-CAA9-4527-9204-D398B2CED857}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QrReaderApp", "QrReaderApp\QrReaderApp\QrReaderApp.csproj", "{AD56D91B-CAA9-4527-9204-D398B2CED857}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
