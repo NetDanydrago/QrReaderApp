@@ -44,10 +44,7 @@ namespace QrReaderApp.Droid.Services
 
                     //Leer el QR de La Imagen
                     var Reader = new MultiFormatReader();
-                    IDictionary<DecodeHintType, object> Hints = new Dictionary<DecodeHintType, object>();
-                    Hints.Add(ZXing.DecodeHintType.PURE_BARCODE, true);
-                    Hints.Add(ZXing.DecodeHintType.TRY_HARDER, true);
-                    Reader.Hints = Hints;
+                    //IDictionary<DecodeHintType, object> Hints = new Dictionary<DecodeHintType, object>();
                     var Result = Reader.decode(ImageBitMap);
                     ResultReader = new QrReaderResult(image, Result.Text);
                 }

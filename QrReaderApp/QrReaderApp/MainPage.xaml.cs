@@ -32,7 +32,6 @@ namespace QrReaderApp
         {
             var MediaFile = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions()
             {
-                PhotoSize = PhotoSize.Small,
                 SaveMetaData = false,
                 Name = $"{Guid.NewGuid()}.jpg"
             });
