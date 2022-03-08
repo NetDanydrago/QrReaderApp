@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QrReaderApp.Android", "QrRe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QrReaderApp.iOS", "QrReaderApp\QrReaderApp.iOS\QrReaderApp.iOS.csproj", "{CDBA09C8-6838-43EE-8E4B-826EEDE084D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QrReaderApp", "QrReaderApp\QrReaderApp\QrReaderApp.csproj", "{AD56D91B-CAA9-4527-9204-D398B2CED857}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QrReaderApp", "QrReaderApp\QrReaderApp\QrReaderApp.csproj", "{AD56D91B-CAA9-4527-9204-D398B2CED857}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXing.Net.Mobile", "QrReaderApp\ZXing.Net.Mobile\ZXing.Net.Mobile.csproj", "{FDB45EAA-9B6F-47F6-A804-83DEEEE960A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,18 @@ Global
 		{AD56D91B-CAA9-4527-9204-D398B2CED857}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{AD56D91B-CAA9-4527-9204-D398B2CED857}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{AD56D91B-CAA9-4527-9204-D398B2CED857}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{FDB45EAA-9B6F-47F6-A804-83DEEEE960A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDB45EAA-9B6F-47F6-A804-83DEEEE960A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDB45EAA-9B6F-47F6-A804-83DEEEE960A6}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{FDB45EAA-9B6F-47F6-A804-83DEEEE960A6}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{FDB45EAA-9B6F-47F6-A804-83DEEEE960A6}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{FDB45EAA-9B6F-47F6-A804-83DEEEE960A6}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{FDB45EAA-9B6F-47F6-A804-83DEEEE960A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDB45EAA-9B6F-47F6-A804-83DEEEE960A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDB45EAA-9B6F-47F6-A804-83DEEEE960A6}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{FDB45EAA-9B6F-47F6-A804-83DEEEE960A6}.Release|iPhone.Build.0 = Release|Any CPU
+		{FDB45EAA-9B6F-47F6-A804-83DEEEE960A6}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{FDB45EAA-9B6F-47F6-A804-83DEEEE960A6}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

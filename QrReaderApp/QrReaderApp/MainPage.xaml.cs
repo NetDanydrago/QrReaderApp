@@ -18,7 +18,29 @@ namespace QrReaderApp
             InitializeComponent();
             PickButton.Clicked += OnPickButton_Clicked;
             TakeButton.Clicked += OnTakeButton_Clicked;
+            ScanButton.Clicked += OnScanButton_Clicked;
         }
+
+        private async void OnScanButton_Clicked(object sender, EventArgs e)
+        {
+
+                var Camera = new CameraPage();
+                Camera.OnTakedPhoto += async (camerasender, image) =>
+                {
+                    PhotoImage.Source = ImageSource.FromStream(() => new MemoryStream(image));
+                    await Navigation.PopAsync();
+                };
+                var scanner = DependencyService.Get<IScaning>();
+                var result = await scanner.ScanAsync();
+                if (result != null)
+                {
+                    TextQr.Text = result.QRText;
+                    Camera.QrText = result.QRText;
+                    await Navigation.PushAsync (Camera);
+                }
+        }
+
+
 
         private async void OnPickButton_Clicked(object sender, EventArgs e)
         {       

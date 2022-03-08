@@ -135,6 +135,10 @@
       <Project>{ad56d91b-caa9-4527-9204-d398b2ced857}</Project>
       <Name>QrReaderApp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ZXing.Net.Mobile\ZXing.Net.Mobile.csproj">
+      <Project>{fdb45eaa-9b6f-47f6-a804-83deeee960a6}</Project>
+      <Name>ZXing.Net.Mobile</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
