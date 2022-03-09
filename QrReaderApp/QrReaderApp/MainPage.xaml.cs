@@ -35,10 +35,11 @@ namespace QrReaderApp
                 if (result != null)
                 {
                     TextQr.Text = result.QRText;
-                    Camera.QrText = result.QRText;
-                    await Navigation.PushAsync (Camera);
+                PhotoImage.Source = ImageSource.FromStream(() => new MemoryStream(result.Photo));
+                //Camera.QrText = result.QRText;
+                //await Navigation.PushAsync (Camera);
                 }
-        }
+           }
 
 
 

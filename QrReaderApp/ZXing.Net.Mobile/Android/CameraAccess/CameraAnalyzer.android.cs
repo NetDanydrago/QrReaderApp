@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Android.Views;
 using ApxLabs.FastAndroidCamera;
+using ZXing.Net.Mobile.Android;
 
 namespace ZXing.Mobile.CameraAccess
 {
@@ -21,6 +22,7 @@ namespace ZXing.Mobile.CameraAccess
 			cameraEventListener = new CameraEventsListener();
 			cameraController = new CameraController(surfaceView, cameraEventListener, scannerHost);
 			Torch = new Torch(cameraController, surfaceView.Context);
+	
 		}
 
 		public Action<Result> BarcodeFound;
@@ -120,14 +122,14 @@ namespace ZXing.Mobile.CameraAccess
 			// use last value for performance gain
 			var cDegrees = cameraController.LastCameraDisplayOrientationDegree;
 
-			if (cDegrees == 90 || cDegrees == 270)
-			{
-				rotate = true;
-				newWidth = height;
-				newHeight = width;
-			}
+            if (cDegrees == 90 || cDegrees == 270)
+            {
+                rotate = true;
+                newWidth = height;
+                newHeight = width;
+            }
 
-			var start = PerformanceCounter.Start();
+            var start = PerformanceCounter.Start();
 
 			LuminanceSource fast = new FastJavaByteArrayYUVLuminanceSource(fastArray, width, height, 0, 0, width, height); // _area.Left, _area.Top, _area.Width, _area.Height);
 			if (rotate)
@@ -146,7 +148,18 @@ namespace ZXing.Mobile.CameraAccess
 				Android.Util.Log.Debug(MobileBarcodeScanner.TAG, "Barcode Found");
 
 				wasScanned = true;
-				BarcodeFound?.Invoke(result);
+				var Picture = new ZxingCameraPicture();
+				var Parameter = cameraController.Camera.GetParameters();
+				Parameter.SetPictureSize(720,480);
+				cameraController.Camera.SetParameters(Parameter);
+				cameraController.Camera.TakePicture(null, null,Picture);
+				while(Picture.ImageArray == null)
+                {
+					Android.Util.Log.Debug(MobileBarcodeScanner.TAG,"wait for image");
+
+				}
+				Result NewResult = new Result(result.Text, Picture.ImageArray, result.ResultPoints, result.BarcodeFormat);
+				BarcodeFound?.Invoke(NewResult);
 				return;
 			}
 		}

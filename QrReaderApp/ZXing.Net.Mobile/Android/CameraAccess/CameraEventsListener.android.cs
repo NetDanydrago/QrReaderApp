@@ -17,7 +17,7 @@ namespace ZXing.Mobile.CameraAccess
 					OnPreviewFrameReady?.Invoke(this, fastArray);
 
 				
-
+					
 					camera.AddCallbackBuffer(fastArray);
 				}
 			}

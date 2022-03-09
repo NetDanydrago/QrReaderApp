@@ -39,6 +39,7 @@ namespace ZXing.Mobile
 		AVCaptureSession session;
 		AVCaptureDevice captureDevice = null;
 		AVCaptureVideoPreviewLayer previewLayer;
+		AVCaptureStillImageOutput stillImageOutput;
 		AVCaptureVideoDataOutput output;
 		OutputRecorder outputRecorder;
 		DispatchQueue queue;
@@ -168,6 +169,14 @@ namespace ZXing.Mobile
 			}
 
 			var input = AVCaptureDeviceInput.FromDevice(captureDevice);
+			var dictionary = new NSMutableDictionary();
+			dictionary[AVVideo.CodecKey] = new NSNumber((int)AVVideoCodec.JPEG);
+			stillImageOutput = new AVCaptureStillImageOutput()
+			{
+				OutputSettings = new NSDictionary()
+			};
+
+			
 			if (input == null)
 			{
 				Console.WriteLine("No input - this won't work on the simulator, try a physical device");
@@ -180,6 +189,7 @@ namespace ZXing.Mobile
 			}
 			else
 				session.AddInput(input);
+				session.AddOutput(stillImageOutput);
 
 
 			var startedAVPreviewLayerAlloc = PerformanceCounter.Start();
@@ -252,7 +262,19 @@ namespace ZXing.Mobile
 
 					if (result != null)
 					{
-						resultCallback(result);
+						var videoConnection = stillImageOutput.ConnectionFromMediaType(AVMediaType.Video);
+						var sampleBuffer = stillImageOutput.CaptureStillImageTaskAsync(videoConnection).Result;
+						var jpegImage = AVCaptureStillImageOutput.JpegStillToNSData(sampleBuffer);
+
+						var photo = new UIImage(jpegImage);
+						Byte[] ImageArray = default;
+						using (NSData imageData = photo.AsJPEG())
+						{
+							ImageArray = new Byte[imageData.Length];
+							System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, ImageArray, 0, Convert.ToInt32(imageData.Length));
+						}
+						Result newResult = new Result(result.Text, ImageArray, result.ResultPoints, result.BarcodeFormat);
+						resultCallback(newResult);
 						return true;
 					}
 				}

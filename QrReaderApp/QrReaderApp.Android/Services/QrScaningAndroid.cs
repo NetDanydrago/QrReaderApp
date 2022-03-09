@@ -23,15 +23,24 @@ namespace QrReaderApp.Droid.Services
         public async Task<QrReaderResult> ScanAsync()
         {
                var optionsCustom = new MobileBarcodeScanningOptions();
-
-            var scanner = new MobileBarcodeScanner()
+            optionsCustom.CameraResolutionSelector += (Resolution) =>
             {
-                TopText = "Scan the QR Code",
-                BottomText = "Please Wait",
+                 Resolution = new List<CameraResolution>()
+                {
+                    new CameraResolution()
+                    {
+                        Width = 720,
+                        Height = 480
+                    }
+                };
+                return Resolution[0];
             };
 
+
+            var scanner = new MobileBarcodeScanner() ;
+
             var scanResult = await scanner.Scan(optionsCustom);
-            return new QrReaderResult(ZxingSccanerImage.Image,scanResult.Text);
+            return new QrReaderResult(scanResult.RawBytes,scanResult.Text);
         }
     }
 }

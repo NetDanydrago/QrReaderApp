@@ -138,6 +138,8 @@ namespace QrReaderApp.Droid.Renders
             }
 
             Camera.StartPreview();
+            
+
         }
 
         void ToggleFlashButtonTapped(object sender, EventArgs e)

@@ -75,6 +75,7 @@ namespace ZXing.Mobile.CameraAccess
 				var previewParameters = Camera.GetParameters();
 				var previewSize = previewParameters.PreviewSize;
 				var bitsPerPixel = ImageFormat.GetBitsPerPixel(previewParameters.PreviewFormat);
+				
 
 
 				var bufferSize = (previewSize.Width * previewSize.Height * bitsPerPixel) / 8;
