@@ -25,20 +25,14 @@ namespace QrReaderApp
         {
 
                 var Camera = new CameraPage();
-                Camera.OnTakedPhoto += async (camerasender, image) =>
+                Camera.OnTakedPhoto += async (camerasender, result) =>
                 {
-                    PhotoImage.Source = ImageSource.FromStream(() => new MemoryStream(image));
+                    PhotoImage.Source = ImageSource.FromStream(() => new MemoryStream(result.Photo));
+                    TextQr.Text =result.QRText;
                     await Navigation.PopAsync();
                 };
-                var scanner = DependencyService.Get<IScaning>();
-                var result = await scanner.ScanAsync();
-                if (result != null)
-                {
-                    TextQr.Text = result.QRText;
-                PhotoImage.Source = ImageSource.FromStream(() => new MemoryStream(result.Photo));
-                //Camera.QrText = result.QRText;
-                //await Navigation.PushAsync (Camera);
-                }
+            await Navigation.PushAsync (Camera);
+
            }
 
 

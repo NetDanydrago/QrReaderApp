@@ -1,4 +1,5 @@
 ﻿using QrReaderApp.Interfaces;
+using QrReaderApp.POCOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +19,15 @@ namespace QrReaderApp
             InitializeComponent();
         }
 
-        public void SendPhoto(byte[] image)
+        public void SendPhoto(byte[] image,string qr)
         {
-            var Handler = OnTakedPhoto;
-            Handler?.Invoke(this, image);
+            var HandlerPhoto = OnTakedPhoto;
+           HandlerPhoto?.Invoke(this,new QrReaderResult(image,qr));
+
         }
 
         public string QrText { get; set; }
 
-        public event EventHandler<byte[]> OnTakedPhoto;
+        public event EventHandler<QrReaderResult> OnTakedPhoto;
     }
 }
