@@ -35,7 +35,6 @@ namespace QrReaderApp.Droid.Renders
         SurfaceTexture SurfaceTexture;
         CameraPage CameraPage;
         bool FlashOn;
-        string QrText;
 
         public CameraAnalyzerRender(Context context)
     : base(context)
@@ -74,6 +73,7 @@ namespace QrReaderApp.Droid.Renders
             TextureView = View.FindViewById<TextureView>(Resource.Id.textureView);
             TextureView.SurfaceTextureListener = this;
             TextView = View.FindViewById<TextView>(Resource.Id.labelQr);
+            TextView.SetTextColor(Android.Graphics.Color.ParseColor("#FA0000"));
         }
 
         void SetupEventHandlers()
@@ -100,6 +100,7 @@ namespace QrReaderApp.Droid.Renders
 				cameraAnalyzer = new CameraAnalyzerQR(this,surface,this);
 
 			cameraAnalyzer.ResumeAnalysis();
+
             StartScanning(null, null);
         }
 
@@ -147,14 +148,18 @@ namespace QrReaderApp.Droid.Renders
 		public void StartScanning(Action<ZXing.Result> scanResultCallback, MobileBarcodeScanningOptions options = null)
 		{
 			cameraAnalyzer.SetupCamera();
-			ScanningOptions = options ?? MobileBarcodeScanningOptions.Default;
+
 
             cameraAnalyzer.BarcodeFound = (result) =>
             {
-                TextView.Text = result.Text;
-                QrText = result.Text;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    TextView.Text = result.Text;
+                    TextView.SetTextColor(Android.Graphics.Color.ParseColor("#00FA39"));
+                });
+                cameraAnalyzer.PauseAnalysis();
+
             };
-            cameraAnalyzer.ResumeAnalysis();
 		}
 
 		public void StopScanning()
@@ -204,7 +209,7 @@ namespace QrReaderApp.Droid.Renders
                     await Image.CompressAsync(Bitmap.CompressFormat.Jpeg, 80, memory);
                     ImageArray = memory.ToArray();
                 }
-                CameraPage.SendPhoto(ImageArray,QrText);
+                CameraPage.SendPhoto(ImageArray, TextView.Text);
                 //Obtener Stream
             }
             catch (Exception ex)

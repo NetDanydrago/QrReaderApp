@@ -9,22 +9,14 @@
         android:layout_marginTop="-95dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/toggleFlashButton"
-        android:layout_width="37dp"
-        android:layout_height="37dp"
+    <TextView
+        android:id="@+id/labelQr"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_gravity="top|left"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="25dp"
-        android:background="@drawable/NoFlashButton" />
-    <TextView
-        android:id="@+id/labelQr"
-        android:layout_width="35dp"
-        android:layout_height="26dp"
-        android:layout_gravity="top|right"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="25dp"
-        android:text="Hola Mundo" />
+        android:text="QR No Detectado.." />
     <Button
         android:id="@+id/takePhotoButton"
         android:layout_width="65dp"

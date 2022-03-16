@@ -90,8 +90,6 @@ namespace QrReaderApp.Droid.Renders
             TakePhotoButton.Click += TakePhotoButtonTapped;
 
 
-            ToggleFlashButton = View.FindViewById<global::Android.Widget.Button>(Resource.Id.toggleFlashButton);
-            ToggleFlashButton.Click += ToggleFlashButtonTapped;
         }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
