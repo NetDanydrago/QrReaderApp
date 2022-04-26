@@ -25,6 +25,7 @@ namespace QrReaderApp
         {
 
                 var Camera = new CameraPage();
+                //Camera.CameraBorder = CameraPageBorder.Horizontal;
                 Camera.OnTakedPhoto += async (camerasender, result) =>
                 {
                     PhotoImage.Source = ImageSource.FromStream(() => new MemoryStream(result.Photo));

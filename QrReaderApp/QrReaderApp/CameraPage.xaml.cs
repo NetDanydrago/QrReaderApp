@@ -28,6 +28,14 @@ namespace QrReaderApp
 
         public string QrText { get; set; }
 
+        public CameraPageBorder CameraBorder { get; set; } = CameraPageBorder.Square;
+
         public event EventHandler<QrReaderResult> OnTakedPhoto;
+    }
+
+    public enum CameraPageBorder
+    {
+        Horizontal,
+        Square
     }
 }

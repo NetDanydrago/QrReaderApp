@@ -91,7 +91,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\BorderQR.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QrReaderApp\QrReaderApp.csproj">
       <Project>{A41F58DE-A229-4FEA-90EB-0D96CD74BE75}</Project>

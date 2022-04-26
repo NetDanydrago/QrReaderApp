@@ -17,6 +17,29 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="25dp"
         android:text="QR No Detectado.." />
+    <ImageView
+        android:id="@+id/BorderQr"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="60dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:background="@drawable/borderqr"/>
+    <ImageView
+        android:id="@+id/BorderSquare"
+        android:layout_marginLeft="79dp"
+        android:layout_marginTop="320dp"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
+        android:visibility="invisible"
+        android:background="@drawable/borderqr"/>
+    <ImageView
+        android:id="@+id/BorderHorizontal"
+        android:layout_marginLeft="31dp"
+        android:layout_marginTop="390dp"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:visibility="invisible"
+        android:background="@drawable/borderqr"/>
     <Button
         android:id="@+id/takePhotoButton"
         android:layout_width="65dp"

@@ -32,6 +32,8 @@ namespace QrReaderApp.Droid.Renders
         Activity Activity;
         CameraFacing CameraType;
         TextureView TextureView;
+        ImageView HorizontalBorder;
+        ImageView SquareBorder;
         SurfaceTexture SurfaceTexture;
         CameraPage CameraPage;
         bool FlashOn;
@@ -67,6 +69,8 @@ namespace QrReaderApp.Droid.Renders
 
         void SetupUserInterface()
         {
+         
+
             Activity = this.Context as Activity;
             View = Activity.LayoutInflater.Inflate(Resource.Layout.CameraLayout, this, false);
             CameraType = CameraFacing.Back;
@@ -74,6 +78,18 @@ namespace QrReaderApp.Droid.Renders
             TextureView.SurfaceTextureListener = this;
             TextView = View.FindViewById<TextView>(Resource.Id.labelQr);
             TextView.SetTextColor(Android.Graphics.Color.ParseColor("#FA0000"));
+            switch (CameraPage.CameraBorder)
+            {
+                case CameraPageBorder.Square :
+                    SquareBorder = View.FindViewById<ImageView>(Resource.Id.BorderSquare);
+                    SquareBorder.Visibility = ViewStates.Visible;
+                break;
+                case CameraPageBorder.Horizontal:
+                    HorizontalBorder = View.FindViewById<ImageView>(Resource.Id.BorderHorizontal);
+                    HorizontalBorder.Visibility = ViewStates.Visible;
+                break;
+            }
+
         }
 
         void SetupEventHandlers()
