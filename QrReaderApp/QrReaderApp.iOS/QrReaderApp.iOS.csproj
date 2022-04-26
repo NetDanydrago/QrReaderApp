@@ -147,6 +147,23 @@
       <Name>ZXing.Net.Mobile</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BundleResource Include="Resources\BorderQR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\FlashButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\NoFlashButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\TakePhotoButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ToggleCameraButton.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
