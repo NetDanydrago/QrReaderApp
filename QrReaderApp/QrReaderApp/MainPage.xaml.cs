@@ -30,9 +30,9 @@ namespace QrReaderApp
                 {
                     PhotoImage.Source = ImageSource.FromStream(() => new MemoryStream(result.Photo));
                     TextQr.Text =result.QRText;
-                    await Navigation.PopAsync();
+                    await Navigation.PopModalAsync();
                 };
-            await Navigation.PushAsync (Camera);
+            await Navigation.PushModalAsync(Camera);
 
            }
 
