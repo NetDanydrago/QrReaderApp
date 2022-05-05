@@ -42,7 +42,9 @@ namespace QrReaderApp.Droid.Renders
         public CameraAnalyzerRender(Context context)
     : base(context)
         {
-            ScanningOptions = new MobileBarcodeScanningOptions() { CameraResolutionSelector = new MobileBarcodeScanningOptions.CameraResolutionSelectorDelegate(SelectLowestResolutionMatchingDisplayAspectRatio)  };
+            ScanningOptions = new MobileBarcodeScanningOptions() {
+                PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.QR_CODE },
+                CameraResolutionSelector = new MobileBarcodeScanningOptions.CameraResolutionSelectorDelegate(SelectLowestResolutionMatchingDisplayAspectRatio)  };
         }
 
 
