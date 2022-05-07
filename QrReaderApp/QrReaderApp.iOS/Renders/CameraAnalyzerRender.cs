@@ -37,6 +37,9 @@ namespace QrReaderApp.iOS.Renders
 
 		public CameraAnalyzerRender()
 		{
+
+			ScanningOptions = new MobileBarcodeScanningOptions() { CameraResolutionSelector = new MobileBarcodeScanningOptions.CameraResolutionSelectorDelegate(SelectLowestResolutionMatchingDisplayAspectRatio) };
+			Scanner =new MobileBarcodeScanner(this);
 			var appFrame = UIScreen.MainScreen.ApplicationFrame;
 
 			View.Frame = new CGRect(0, 0, appFrame.Width, appFrame.Height);
